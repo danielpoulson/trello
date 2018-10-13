@@ -1,4 +1,7 @@
 const request = require("request");
+const config = require("./config")
+const api = config.trello.API_KEY;
+const token = config.trello.TOKEN;
 
 // const bfields2 = "idBoards"
 //NOTE: Used to access member information
@@ -48,12 +51,13 @@ function runLabels() {
 }
 
 // const cfields = "name,idBoard"
-
-// request(`https://api.trello.com/1/boards/5a09fb675e9f0abca157711f/cards?fields=${cfields}&key=${api}&token=${token}`, { json: true }, (err, res, body) => {
-//   if (err) { return console.log(err); }
-//   console.log("*****************This is the Card Section*********************")
-//   console.log(body);
-// });
+function runLists() {
+  request(`https://api.trello.com/1/boards/5a09fb675e9f0abca157711f/lists/?key=${api}&token=${token}`, { json: true }, (err, res, body) => {
+    if (err) { return console.log(err); }
+    console.log("*****************This is the List Section*********************")
+    console.log(body);
+  });
+}
 
 function saveCard() {
   const options = {
@@ -92,4 +96,5 @@ function deleteCard() {
 
 // saveCard();
 // runLabels();
-deleteCard();
+// deleteCard();
+runLists();
